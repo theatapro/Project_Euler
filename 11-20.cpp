@@ -215,8 +215,82 @@ void sol_15(void)
 	cout << Comb[n][k];
 }
 
+void sol_25(void)
+{
+	vector<vector<int>> fib(5000, vector<int>(1001,0));
+	fib[0][0] = 1;
+	fib[1][0] = 1;
+	int term = 2;
+
+	while(fib[term - 1][999] == 0)
+	{
+		rep(i, 0, 1000)
+		{
+			fib[term][i] += fib[term - 2][i] + fib[term - 1][i];
+			if(fib[term][i] >= 10)
+			{
+				fib[term][i + 1] ++;
+				fib[term][i] %= 10;
+			}
+		}
+		term++;
+	}
+	cout << term <<endl;
+}
+
+void sol_48(void)
+{
+	const ll mod = pow(10, 10);
+	ll pro = 1;
+	ll ans = 0;
+	rep(i, 1, 1001)
+	{
+		int x = i;
+		pro = 1;
+		rep(j, 0, x)
+		{
+			pro *= x;
+			pro %= mod;
+		}
+		ans += pro;
+		ans %= mod;
+	}
+
+	cout << ans << endl;
+}
+
+//for sol_18
+int ans = 0;
+void dfs(vector<vector<int>> &triangle, int n, int x, int sum)
+{
+	if(n == 15)
+	{
+		ans = max(ans, sum);
+		return;
+	}
+	else
+	{
+		sum += triangle[n][x];
+		rep(i, 0, 2)
+			dfs(triangle, n + 1, x + i, sum);
+	}
+}
+
+void sol_18(void)
+{
+	int const N = 15;
+	vector<vector<int>> triangle(N, vector<int>(N, 0));
+
+	rep(i, 0, N)
+		rep(j, 0, i + 1)
+			cin >> triangle[i][j];
+
+	dfs(triangle, 0, 0, 0);
+	cout << ans << endl;
+}
+
 int main(void)
 {
-	sol_15();
+	sol_18();
 	return(0);
 }
