@@ -180,6 +180,7 @@ void sol_8(void)
 	cout << ans << endl;
 }
 
+//for sol_10
 bool prime_judge(int n)
 {
 	for(int p = 2; p*p <= n; ++p)
