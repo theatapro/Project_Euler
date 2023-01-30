@@ -21,7 +21,8 @@ bool prime_check(int n)
 //a[]={1,2,3}
 void sol_31(void)
 {
-	const vector<ll> money_vec = {1, 2, 5, 10, 20, 50, 100, 200};
+	const vector<ll> money_vec;
+	// money_vec = {1, 2, 5, 10, 20, 50, 100, 200};
 	const ll K = 200;
 	ll M = money_vec.size();
 	vector<ll> dp(K + 1);
@@ -36,8 +37,44 @@ void sol_31(void)
 
 }
 
+int factorial(int n)
+{
+	int ret = n;
+	if(n == 0 || n == 1)
+		return(1);
+	else
+	{
+		while(n > 1)
+		{
+			n --;
+			ret *= n;
+		}
+	}
+	return(ret);
+}
+
+void sol_34(void)
+{
+	vector<int> facto_vec(10);
+	rep(i, 0, 10)
+		facto_vec[i] = factorial(i);
+
+	const ll INF = 10e7;
+	ll ans = 0;
+	rep(i, 3, INF)
+	{
+		string S = to_string(i);
+		ll dig_sum = 0;
+		rep(j, 0, S.size())
+			dig_sum += facto_vec[S[j]-'0'];
+		if(i == dig_sum)
+			ans += dig_sum;
+	}
+	cout << ans << endl;;
+}
+
 int main(void)
 {
-	sol_31();
+	sol_34();
 	return(0);
 }
